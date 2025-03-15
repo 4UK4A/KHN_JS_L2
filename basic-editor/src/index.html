@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Editor with Dynamic Highlighting</title>
+    <link rel="stylesheet" href="../src/styles/style.css">
+</head>
+<body>
+    <div class="editor-container">
+        <h1>Basic Editor</h1>
+        <div class="controls">
+            <div class="word-controls">
+                <input type="text" id="newWord" placeholder="Enter word to highlight">
+                <div class="color-controls">
+                    <label>Background:
+                        <input type="color" id="wordBackgroundColor" value="#ffd700">
+                    </label>
+                    <label>Text:
+                        <input type="color" id="wordTextColor" value="#000000">
+                    </label>
+                </div>
+                <label for="caseSensitive">Case Sensitive:</label>
+                <input type="checkbox" id="caseSensitive">
+                <button id="addWord">Add Word</button>
+            </div>
+            <div class="word-list">
+                <h3>Words to highlight:</h3>
+                <ul id="highlightWordsList"></ul>
+            </div>
+        </div>
+        <div class="main-editor">
+            <textarea id="mainText" placeholder="Enter your main text here..."></textarea>
+        </div>
+        <div id="output" class="output-area"></div>
+        <div id="errorMessages" class="error-messages"></div>
+    </div>
+    <script src="scripts/editor.js"></script>
+    <script src="scripts/highlighter.js"></script>
+    <script src="scripts/validator.js"></script>
+</body>
+</html>
