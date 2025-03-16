@@ -16,7 +16,7 @@ h1 {
     background-color: #fff8dc;
     border-radius: 8px;
     box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.2);
-    max-width: 800px;
+    max-width: 95%;
     margin: 20px auto;
 }
 
@@ -152,4 +152,22 @@ input[type="color"] {
     border: 1px solid #8b4513;
     background-color: #fff8e7;
     min-height: 100px;
+}
+
+.settings-controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.search-words {
+    margin: 10px 0;
+}
+
+.search-words input {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    background-color: #fff8dc;
 }

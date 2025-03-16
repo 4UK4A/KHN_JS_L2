@@ -10,6 +10,11 @@
     <div class="editor-container">
         <h1>Basic Editor</h1>
         <div class="controls">
+            <div class="settings-controls">
+                <button id="exportSettings">Export Settings</button>
+                <button id="importSettings">Import Settings</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+            </div>
             <div class="word-controls">
                 <input type="text" id="newWord" placeholder="Enter word to highlight">
                 <div class="color-controls">
@@ -23,6 +28,9 @@
                 <label for="caseSensitive">Case Sensitive:</label>
                 <input type="checkbox" id="caseSensitive">
                 <button id="addWord">Add Word</button>
+            </div>
+            <div class="search-words">
+                <input type="text" id="searchWords" placeholder="Search in saved words...">
             </div>
             <div class="word-list">
                 <h3>Words to highlight:</h3>
