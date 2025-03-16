@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordTextColorInput = document.getElementById('wordTextColor');
 
     const searchWordsInput = document.getElementById('searchWords');
+    const wordDropdown = document.getElementById('wordDropdown');
 
     const exportSettingsBtn = document.getElementById('exportSettings');
     const importSettingsBtn = document.getElementById('importSettings');
@@ -212,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             wordsList.appendChild(li);
         });
+        updateDropdownList(searchWordsInput.value);
     }
 
     window.updateWordBackgroundColor = (word, color) => {
@@ -334,5 +336,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+    function updateDropdownList(searchTerm = '') {
+        wordDropdown.innerHTML = '';
+        const words = Array.from(highlightWords.keys());
+        
+        const filteredWords = searchTerm ? 
+            words.filter(word => word.toLowerCase().includes(searchTerm.toLowerCase())) : 
+            words;
+    
+        if (filteredWords.length === 0) {
+            const noResults = document.createElement('div');
+            noResults.className = 'no-results';
+            noResults.textContent = 'Нічого не знайдено';
+            wordDropdown.appendChild(noResults);
+        } else {
+            filteredWords.forEach(word => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                const settings = highlightWords.get(word);
+                
+                item.innerHTML = `
+                    <span class="word-text" style="background-color: ${settings.backgroundColor}; color: ${settings.textColor}">
+                        ${word}
+                    </span>
+                `;
+                
+                item.addEventListener('click', () => {
+                    searchWordsInput.value = word;
+                    wordDropdown.classList.remove('show');
+                    
+                    // Знаходимо елемент у списку налаштувань
+                    const wordListItem = Array.from(wordsList.children).find(li => 
+                        li.querySelector('.word-text').textContent === word
+                    );
 
+                    if (wordListItem) {
+                        // Видаляємо попередні підсвічування
+                        wordsList.querySelectorAll('.highlighted-item').forEach(el => 
+                            el.classList.remove('highlighted-item')
+                        );
+
+                        // Підсвічуємо вибраний елемент
+                        wordListItem.classList.add('highlighted-item');
+                        
+                        // Прокручуємо до елемента
+                        wordListItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+                
+                wordDropdown.appendChild(item);
+            });
+        }
+    }
+    
+    // Показуємо/приховуємо випадаючий список
+    searchWordsInput.addEventListener('focus', () => {
+        updateDropdownList(searchWordsInput.value);
+        wordDropdown.classList.add('show');
+    });
+    
+    // Оновлюємо список при введенні
+    searchWordsInput.addEventListener('input', (e) => {
+        updateDropdownList(e.target.value);
+        wordDropdown.classList.add('show');
+    });
+    
+    // Закриваємо список при кліку поза ним
+    document.addEventListener('click', (e) => {
+        if (!searchWordsInput.contains(e.target) && !wordDropdown.contains(e.target)) {
+            wordDropdown.classList.remove('show');
+        }
+    });
 });

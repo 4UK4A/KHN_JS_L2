@@ -171,3 +171,64 @@ input[type="color"] {
     border-radius: 4px;
     background-color: #fff8dc;
 }
+
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff8dc;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(139, 69, 19, 0.2);
+    z-index: 1000;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #deb887;
+}
+
+.dropdown-item:hover {
+    background-color: #faebd7;
+}
+
+.dropdown-item.selected {
+    background-color: #ffe4b5;
+}
+
+.no-results {
+    padding: 8px 12px;
+    color: #8b0000;
+    font-style: italic;
+}
+
+.word-list li.highlighted-item {
+    animation: highlight-pulse 1s;
+    border: 2px solid #8b4513;
+}
+
+@keyframes highlight-pulse {
+    0% {
+        background-color: #faebd7;
+    }
+    50% {
+        background-color: #ffe4b5;
+    }
+    100% {
+        background-color: #faebd7;
+    }
+}
